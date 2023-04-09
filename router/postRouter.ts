@@ -6,5 +6,6 @@ const router: Router = express.Router();
 router.post('/posts', PostController.addPost);
 router.get('/posts', PostController.getAllPosts);
 router.get('/posts/:id', PostController.getPostById);
+router.put('/posts/title/:id', PostController.updatePostTitle);
 
 export default router;
