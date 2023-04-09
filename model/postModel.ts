@@ -12,3 +12,7 @@ export interface Post {
 export const addPost = async (post: Post) => {
   await postCollection.insertOne(post);
 };
+
+export const getAllPosts = async () => {
+  return await postCollection.find().toArray();
+};

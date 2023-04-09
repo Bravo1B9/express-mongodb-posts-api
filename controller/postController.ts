@@ -14,3 +14,8 @@ export const addPost = async (req: Request, res: Response) => {
   await PostModel.addPost(post);
   res.status(201).json({ msg: 'Post added' });
 };
+
+export const getAllPosts = async (req: Request, res: Response) => {
+  const posts = await PostModel.getAllPosts();
+  res.status(200).json({ posts });
+};
