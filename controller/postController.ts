@@ -19,3 +19,8 @@ export const getAllPosts = async (req: Request, res: Response) => {
   const posts = await PostModel.getAllPosts();
   res.status(200).json({ posts });
 };
+
+export const getPostById = async (req: Request, res: Response) => {
+  const post = await PostModel.getPostById(req.params.id);
+  res.status(200).json({ post });
+};
