@@ -1,4 +1,3 @@
-import { assert } from "console";
 import { postCollection } from "../db";
 import { ObjectId } from "mongodb";
 
@@ -38,7 +37,6 @@ export const getPostById = async (postId: string) => {
           body: 1,
           upvotes: 1,
           downvotes: 1,
-          createdAt: 1,
         },
       },
     ])
