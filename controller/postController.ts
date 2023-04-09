@@ -55,3 +55,9 @@ export const upvotePost = async (req: Request, res: Response) => {
   await PostModel.upvotePost(postId);
   res.status(200).json({ msg: `Post ${postId} upvoted` });
 };
+
+export const downvotePost = async (req: Request, res: Response) => {
+  const postId = req.params.id;
+  await PostModel.downvotePost(postId);
+  res.status(200).json({ msg: `Post ${postId} downvoted` });
+};
