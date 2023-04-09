@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import * as PostModel from "../model/postModel";
 import { Post } from "../model/postModel";
+import { Comment } from "../model/commentModel";
 
 export const addPost = async (req: Request, res: Response) => {
   const post: Post = {
@@ -60,4 +61,17 @@ export const downvotePost = async (req: Request, res: Response) => {
   const postId = req.params.id;
   await PostModel.downvotePost(postId);
   res.status(200).json({ msg: `Post ${postId} downvoted` });
+};
+
+export const addComment = async (req: Request, res: Response) => {
+  const postId = req.params.id;
+  const comment: Comment = {
+    body: req.body.body,
+    upvotes: 0,
+    downvotes: 0,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  }
+  await PostModel.addComment(postId, comment);
+  res.status(201).json({ msg: `Comment added to post: ${postId}` });
 };

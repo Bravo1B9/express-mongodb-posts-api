@@ -1,5 +1,6 @@
 import { postCollection } from "../db";
 import { ObjectId } from "mongodb";
+import { Comment } from "./commentModel";
 
 export interface Post {
   title: string;
@@ -60,7 +61,7 @@ export const updatePostBody = async (postId: string, newBody: string) => {
 export const upvotePost = async (postId: string) => {
   const post = await postCollection.findOne({ _id: new ObjectId(postId) });
   post.upvotes++;
-  if(post.downvotes > 0) {
+  if (post.downvotes > 0) {
     post.downvotes--;
   }
   await postCollection.updateOne({ _id: new ObjectId(postId) }, { $set: post });
@@ -69,8 +70,15 @@ export const upvotePost = async (postId: string) => {
 export const downvotePost = async (postId: string) => {
   const post = await postCollection.findOne({ _id: new ObjectId(postId) });
   post.downvotes++;
-  if(post.upvotes > 0) {
+  if (post.upvotes > 0) {
     post.upvotes--;
-  };
+  }
   await postCollection.updateOne({ _id: new ObjectId(postId) }, { $set: post });
+};
+
+export const addComment = async (postId: string, comment: Comment) => {
+  await postCollection.updateOne(
+    { _id: new ObjectId(postId) },
+    { $push: { comments: comment } }
+  );
 };
