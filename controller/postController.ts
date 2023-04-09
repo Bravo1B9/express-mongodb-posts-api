@@ -21,8 +21,17 @@ export const getAllPosts = async (req: Request, res: Response) => {
 };
 
 export const getPostById = async (req: Request, res: Response) => {
-  const post = await PostModel.getPostById(req.params.id);
-  res.status(200).json({ post });
+  try {
+    const post = await PostModel.getPostById(req.params.id);
+    if(!post) {
+      res.status(404).json({ error: `Post with ID: ${req.params.id} not found` });
+    } else {
+      res.status(200).json({ post });
+    };
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "An error occurred while fetching the post." });
+  }
 };
 
 export const updatePostTitle = async (req: Request, res: Response) => {
