@@ -7,5 +7,6 @@ router.post('/posts', PostController.addPost);
 router.get('/posts', PostController.getAllPosts);
 router.get('/posts/:id', PostController.getPostById);
 router.put('/posts/title/:id', PostController.updatePostTitle);
+router.put('/posts/body/:id', PostController.updatePostBody);
 
 export default router;

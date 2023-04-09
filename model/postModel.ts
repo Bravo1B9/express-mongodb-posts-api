@@ -51,3 +51,10 @@ export const updatePostTitle = async (postId: string, newTitle: string) => {
     { $set: { title: newTitle } }
   );
 };
+
+export const updatePostBody = async (postId: string, newBody: string) => {
+  await postCollection.updateOne(
+    { _id: new ObjectId(postId) },
+    { $set: { body: newBody } }
+  )
+};

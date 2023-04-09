@@ -33,3 +33,10 @@ export const updatePostTitle = async (req: Request, res: Response) => {
     .status(200)
     .json({ msg: `Post ${postId} updated with the new title of: ${newTitle}` });
 };
+
+export const updatePostBody = async (req: Request, res: Response) => {
+  const postId = req.params.id;
+  const newBody = req.body.newBody;
+  await PostModel.updatePostBody(postId, newBody);
+  res.status(200).json({ msg: `Post ${postId} updated with new body of: ${newBody}` });
+};
