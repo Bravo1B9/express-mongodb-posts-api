@@ -19,3 +19,8 @@ export const getAllPosts = async (req: Request, res: Response) => {
   const posts = await PostModel.getAllPosts();
   res.status(200).json({ posts });
 };
+
+export const getAllPosts2 = async (req: Request, res: Response) => {
+  const posts = await PostModel.getAllPosts2();
+  res.status(200).json({ posts });
+};

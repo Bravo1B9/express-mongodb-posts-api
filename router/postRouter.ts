@@ -1,9 +1,10 @@
 import express, { Router } from "express";
-import { addPost, getAllPosts } from "../controller/postController";
+import * as PostController from "../controller/postController";
 
 const router: Router = express.Router();
 
-router.post('/posts', addPost);
-router.get('/posts', getAllPosts)
+router.post('/posts', PostController.addPost);
+router.get('/posts', PostController.getAllPosts)
+router.get('/posts/2', PostController.getAllPosts2);
 
 export default router;

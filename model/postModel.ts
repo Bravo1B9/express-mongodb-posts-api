@@ -16,3 +16,11 @@ export const addPost = async (post: Post) => {
 export const getAllPosts = async () => {
   return await postCollection.find().toArray();
 };
+
+export const getAllPosts2 = async () => {
+  return await postCollection.aggregate([
+    { $project: { "title": 1, "body": 1, "upvotes": 1, "downvotes": 1, "createdAt": 1 } },
+    { $sort: { "createdAt": - 1 } },
+    { $limit: 3 }
+  ]).toArray();
+};
