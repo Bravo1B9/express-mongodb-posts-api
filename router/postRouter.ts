@@ -4,7 +4,6 @@ import * as PostController from "../controller/postController";
 const router: Router = express.Router();
 
 router.post('/posts', PostController.addPost);
-router.get('/posts', PostController.getAllPosts)
-router.get('/posts/2', PostController.getAllPosts2);
+router.get('/posts', PostController.getAllPosts);
 
 export default router;
