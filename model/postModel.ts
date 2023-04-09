@@ -54,5 +54,14 @@ export const updatePostBody = async (postId: string, newBody: string) => {
   await postCollection.updateOne(
     { _id: new ObjectId(postId) },
     { $set: { body: newBody } }
-  )
+  );
+};
+
+export const upvotePost = async (postId: string) => {
+  const post = await postCollection.findOne({ _id: new ObjectId(postId) });
+  post.upvotes++;
+  if(post.downvotes > 0) {
+    post.downvotes--;
+  }
+  await postCollection.updateOne({ _id: new ObjectId(postId) }, { $set: post });
 };

@@ -49,3 +49,9 @@ export const updatePostBody = async (req: Request, res: Response) => {
   await PostModel.updatePostBody(postId, newBody);
   res.status(200).json({ msg: `Post ${postId} updated with new body of: ${newBody}` });
 };
+
+export const upvotePost = async (req: Request, res: Response) => {
+  const postId = req.params.id;
+  await PostModel.upvotePost(postId);
+  res.status(200).json({ msg: `Post ${postId} upvoted` });
+};
