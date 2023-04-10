@@ -68,6 +68,12 @@ export const downvotePost = async (req: Request, res: Response) => {
   res.status(200).json({ msg: `Post ${postId} downvoted` });
 };
 
+export const deletePost = async (req: Request, res: Response) => {
+  const postId = req.params.id;
+  await PostModel.deletePost(postId);
+  res.status(200).json({ msg: `Post with ID: ${postId} deleted` });
+};
+
 export const addComment = async (req: Request, res: Response) => {
   const postId = req.params.id;
   const comment: Comment = {

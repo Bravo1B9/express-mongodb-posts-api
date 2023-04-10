@@ -11,6 +11,7 @@ router.put('/posts/title/:id', PostController.updatePostTitle);
 router.put('/posts/body/:id', PostController.updatePostBody);
 router.put('/posts/upvote/:id', PostController.upvotePost);
 router.put('/posts/downvote/:id', PostController.downvotePost);
+router.delete('/posts/:id', PostController.deletePost);
 router.post('/posts/comments/:id', PostController.addComment);
 router.get('/posts/comments/:id', PostController.getComments);
 router.put('/posts/:postId/comments/:commentId/upvote', PostController.upvoteComment);

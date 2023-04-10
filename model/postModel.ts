@@ -93,6 +93,10 @@ export const downvotePost = async (postId: string) => {
   await postCollection.updateOne({ _id: new ObjectId(postId) }, { $set: post });
 };
 
+export const deletePost = async (postId: string) => {
+  await postCollection.deleteOne({ _id: new ObjectId(postId) });
+};
+
 export const addComment = async (postId: string, comment: Comment) => {
   await postCollection.updateOne(
     { _id: new ObjectId(postId) },
