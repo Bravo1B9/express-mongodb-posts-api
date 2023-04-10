@@ -84,5 +84,5 @@ export const addComment = async (req: Request, res: Response) => {
 export const getComments = async (req: Request, res: Response) => {
   const postId = req.params.id;
   const comments = await PostModel.getComments(postId);
-  res.status(200).json({ comments });
+  res.status(200).json(comments);
 };

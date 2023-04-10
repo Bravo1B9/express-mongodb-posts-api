@@ -21,7 +21,7 @@ export const getAllPosts = async () => {
       {
         $project: { title: 1, body: 1, upvotes: 1, downvotes: 1 },
       },
-      { $sort: { upvotes: - 1, downvotes: 1 } }
+      { $sort: { upvotes: -1, downvotes: 1 } },
     ])
     .toArray();
 };
@@ -55,7 +55,7 @@ export const getTopThreePosts = async () => {
           downvotes: 1,
         },
       },
-      { $sort: { upvotes: - 1 } },
+      { $sort: { upvotes: -1 } },
       { $limit: 3 },
     ])
     .toArray();
@@ -101,11 +101,28 @@ export const addComment = async (postId: string, comment: Comment) => {
 };
 
 export const getComments = async (postId: string) => {
-  return await postCollection.aggregate([
-    { $match: { _id: new ObjectId(postId) } },
-    {
-      $project: { _id: 0, comments: 1 }
-    }
-  ])
-  .toArray();
-}
+  return await postCollection
+    .aggregate([
+      { $match: { _id: new ObjectId(postId) } },
+      { $unwind: { path: "$comments", preserveNullAndEmptyArrays: true } },
+      {
+        $group: {
+          _id: '$_id',
+          _comments: {
+            $push: {
+              body: "$comments.body",
+              upvotes: "$comments.upvotes",
+              downvotes: "$comments.downvotes",
+            }
+          },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          comments: '$_comments'
+        },
+      },
+    ])
+    .toArray();
+};
