@@ -21,8 +21,7 @@ export const getAllPosts = async () => {
       {
         $project: { title: 1, body: 1, upvotes: 1, downvotes: 1 },
       },
-      { $sort: { upvotes: - 1 } },
-      { $sort: { downvotes: + 1 } }
+      { $sort: { upvotes: - 1, downvotes: 1 } }
     ])
     .toArray();
 };
