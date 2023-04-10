@@ -13,5 +13,6 @@ router.put('/posts/upvote/:id', PostController.upvotePost);
 router.put('/posts/downvote/:id', PostController.downvotePost);
 router.post('/posts/comments/:id', PostController.addComment);
 router.get('/posts/comments/:id', PostController.getComments);
+router.put('/posts/:postId/comments/:commentId/upvote', PostController.upvoteComment);
 
 export default router;

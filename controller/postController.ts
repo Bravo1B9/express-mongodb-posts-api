@@ -86,3 +86,9 @@ export const getComments = async (req: Request, res: Response) => {
   const comments = await PostModel.getComments(postId);
   res.status(200).json(comments);
 };
+
+export const upvoteComment = async (req: Request, res: Response) => {
+  const { postId, commentId } = req.params;
+  await PostModel.upvoteComment(postId, commentId);
+  res.status(200).json({ msg: `Comment upvoted` });
+};
