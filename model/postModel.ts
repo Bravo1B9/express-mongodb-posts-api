@@ -100,3 +100,13 @@ export const addComment = async (postId: string, comment: Comment) => {
     { $push: { comments: comment } }
   );
 };
+
+export const getComments = async (postId: string) => {
+  return await postCollection.aggregate([
+    { $match: { _id: new ObjectId(postId) } },
+    {
+      $project: { _id: 0, comments: 1 }
+    }
+  ])
+  .toArray();
+}
