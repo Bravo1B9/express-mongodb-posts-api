@@ -110,6 +110,7 @@ export const getComments = async (postId: string) => {
           _id: '$_id',
           _comments: {
             $push: {
+              _id: '$comments._id',
               body: "$comments.body",
               upvotes: "$comments.upvotes",
               downvotes: "$comments.downvotes",
@@ -125,4 +126,8 @@ export const getComments = async (postId: string) => {
       },
     ])
     .toArray();
+};
+
+export const upvoteComment = async (postId: string, commentId: string) => {
+  return await postCollection.updateOne();
 };
