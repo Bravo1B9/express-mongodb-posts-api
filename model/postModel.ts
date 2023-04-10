@@ -133,11 +133,8 @@ export const getComments = async (postId: string) => {
 };
 
 export const upvoteComment = async (postId: string, commentId: string) => {
-  const postObjectId = new ObjectId(postId);
-  const commentObjectId = new ObjectId(commentId);
-
   return await postCollection.updateOne(
-    { _id: postObjectId, "comments._id": commentObjectId },
+    { _id: new ObjectId(postId), "comments._id": new ObjectId(commentId) },
     {
       $inc: {
         "comments.$.upvotes": 1,
@@ -148,11 +145,8 @@ export const upvoteComment = async (postId: string, commentId: string) => {
 };
 
 export const downvoteComment = async (postId: string, commentId: string) => {
-  const postObjectId = new ObjectId(postId);
-  const commentObjectId = new ObjectId(commentId);
-
   return await postCollection.updateOne(
-    { _id: postObjectId, "comments._id": commentObjectId },
+    { _id: new ObjectId(postId), "comments._id": new ObjectId(commentId) },
     {
       $inc: {
         "comments.$.downvotes": 1,
