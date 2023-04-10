@@ -44,6 +44,23 @@ export const getPostById = async (postId: string) => {
     .toArray();
 };
 
+export const getTopThreePosts = async () => {
+  return await postCollection
+    .aggregate([
+      {
+        $project: {
+          _id: 0,
+          title: 1,
+          body: 1,
+          upvotes: 1,
+          downvotes: 1,
+        },
+      },
+      { $sort: { upvotes: -1 } }
+    ])
+    .toArray();
+};
+
 export const updatePostTitle = async (postId: string, newTitle: string) => {
   await postCollection.updateOne(
     { _id: new ObjectId(postId) },

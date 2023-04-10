@@ -35,6 +35,11 @@ export const getPostById = async (req: Request, res: Response) => {
   }
 };
 
+export const getTopThreePosts = async (req: Request, res: Response) => {
+  const posts = await PostModel.getTopThreePosts();
+  res.status(200).json({ posts });
+};
+
 export const updatePostTitle = async (req: Request, res: Response) => {
   const postId = req.params.id;
   const newTitle = req.body.newTitle;
