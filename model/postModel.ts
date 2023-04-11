@@ -155,3 +155,10 @@ export const downvoteComment = async (postId: string, commentId: string) => {
     }
   );
 };
+
+export const removeComment = async (postId: string, commentId: string) => {
+  await postCollection.updateOne(
+    { _id: new ObjectId(postId) },
+    { $pull: { comments: { _id: new ObjectId(commentId) } } }
+  )
+};

@@ -104,3 +104,9 @@ export const downvoteComment = async (req: Request, res: Response) => {
   await PostModel.downvoteComment(postId, commentId);
   res.status(200).json({ msg: `Comment downvoted` });
 };
+
+export const removeComment = async (req: Request, res: Response) => {
+  const { postId, commentId } = req.params;
+  await PostModel.removeComment(postId, commentId);
+  res.status(200).json({ msg: `Comment ${commentId} removed` });
+};
